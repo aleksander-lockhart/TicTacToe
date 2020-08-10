@@ -15,18 +15,16 @@ import java.util.ArrayList;
 
 public class TicTacToe extends Application {
 
-    private static ArrayList<Button> cells = new ArrayList<>();
     private static ArrayList<Boolean> filledCells = new ArrayList<>(9);
+    private static ArrayList<Button> cells = new ArrayList<>();
     private ComputerMove aiLogic;
     private Label statusLabel;
-    Pane root2 = new Pane();
-
 
     public TicTacToe() {
         statusLabel = new Label("");
-        aiLogic = new RandomComputerMove();
+        aiLogic = new SmartCompMove();
 
-        // Pusta lista pol
+        // Create empty grid
         for (int i = 0; i < 9; i++) {
             filledCells.add(false);
         }
@@ -48,7 +46,7 @@ public class TicTacToe extends Application {
     }
 
     @Override
-    public void start(Stage primaryStage) throws Exception {
+    public void start(Stage primaryStage) {
 
         // Grid for game
         GridPane board = new GridPane() {{
@@ -124,7 +122,7 @@ public class TicTacToe extends Application {
             }
 
             // Comp move
-            int aiIndex = aiLogic.nextMove();
+            int aiIndex = aiLogic.nextMove(filledCells, cells);
             fillCell("O", aiIndex);
 
             if (whoWins("O")) {
@@ -204,17 +202,19 @@ public class TicTacToe extends Application {
         return false;
     }
 
-    // Comp pseudo "logic" - stupid as hell
-    class RandomComputerMove implements ComputerMove {
-        @Override
-        public int nextMove() {
-            int aiIndex = (int)Math.floor(Math.random() * 9);
-            while (filledCells.get(aiIndex)) {
-                aiIndex = (int)Math.floor(Math.random() * 9);
-            }
-            return aiIndex;
-        }
-    }
+    // REMOVED FOR OTHER AI CLASS
+
+//    // Comp pseudo "logic" - stupid as hell
+//    class RandomComputerMove implements ComputerMove {
+//        @Override
+//        public int nextMove() {
+//            int aiIndex = (int)Math.floor(Math.random() * 9);
+//            while (filledCells.get(aiIndex)) {
+//                aiIndex = (int)Math.floor(Math.random() * 9);
+//            }
+//            return aiIndex;
+//        }
+//    }
 
     public static void main(String[] args) {
         Application.launch(args);
