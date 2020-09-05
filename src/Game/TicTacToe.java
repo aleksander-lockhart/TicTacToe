@@ -14,16 +14,16 @@ import java.util.ArrayList;
 
 public class TicTacToe extends Application {
 
-    private static ArrayList<Boolean> filledCells = new ArrayList<>(9);
-    private static ArrayList<Button> cells = new ArrayList<>();
-    private ComputerMove aiLogic;
-    private Label statusLabel;
-    Alerts showInfo = new Alerts();
+    private final static ArrayList<Boolean> filledCells = new ArrayList<>(9);
+    private final static ArrayList<Button> cells = new ArrayList<>();
+    private final ComputerMove aiLogic;
+    private final Label statusLabel;
     AlternativeAlert showStatus = new AlternativeAlert();
 
 
     public TicTacToe() {
         statusLabel = new Label("");
+        statusLabel.setStyle("-fx-font-size: 22px;");
         aiLogic = new SmartCompMove();
 
         // Create empty grid
@@ -33,8 +33,7 @@ public class TicTacToe extends Application {
         clearGridArray();
 
         // Show Rules
-//        showInfo.showRules();
-        showStatus.createAlert();
+        showStatus.showRules();
     }
 
     @Override
@@ -57,8 +56,8 @@ public class TicTacToe extends Application {
         Button clearButton = new Button("Clear board") {{
             setFont(new Font(16));
             setOnAction(ae -> clearGrid());
-        }};
 
+        }};
 
         // layout on scene
         BorderPane root = new BorderPane() {{
@@ -74,7 +73,7 @@ public class TicTacToe extends Application {
         }};
 
         // scene create and show
-        Scene scene = new Scene(root, 500, 500);
+        Scene scene = new Scene(root, 500, 550);
         primaryStage.setMaxWidth(410);
         primaryStage.setMaxHeight(550);
         primaryStage.setScene(scene);
@@ -102,7 +101,7 @@ public class TicTacToe extends Application {
                 statusLabel.setText("");
             }
 
-            if (whoWins("X")) {
+            if (WinCheck.whoWins("X", cells)) {
                 statusLabel.setText("Player have won");
                 disableGrid();
                 return;
@@ -117,7 +116,7 @@ public class TicTacToe extends Application {
             int aiIndex = aiLogic.nextMove(filledCells, cells);
             fillCell("O", aiIndex);
 
-            if (whoWins("O")) {
+            if (WinCheck.whoWins("O", cells)) {
                 statusLabel.setText("Computer has won");
                 disableGrid();
             }
@@ -160,38 +159,6 @@ public class TicTacToe extends Application {
                 return false;
         }
         return true;
-    }
-
-    private static boolean whoWins(String playerString) {
-        // horizontal check
-        for (int r = 0; r < 3; r++) {
-            if (cells.get(r * 3).getText().equals(playerString) &&
-                    cells.get(r * 3 + 1).getText().equals(playerString) &&
-                    cells.get(r * 3 + 2).getText().equals(playerString))
-                return true;
-        }
-
-        // vertical check
-        for (int c = 0; c < 3; c++) {
-            if (cells.get(c).getText().equals(playerString) &&
-                    cells.get(3 + c).getText().equals(playerString) &&
-                    cells.get(6 + c).getText().equals(playerString))
-                return true;
-        }
-
-        // left-to-right down diagonal
-        if (cells.get(0).getText().equals(playerString) &&
-                cells.get(4).getText().equals(playerString) &&
-                cells.get(8).getText().equals(playerString))
-            return true;
-
-        // right-to-left down diagonal
-        if (cells.get(2).getText().equals(playerString) &&
-                cells.get(4).getText().equals(playerString) &&
-                cells.get(6).getText().equals(playerString))
-            return true;
-
-        return false;
     }
 
     // REMOVED FOR OTHER AI CLASS

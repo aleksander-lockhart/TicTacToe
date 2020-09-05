@@ -1,12 +1,12 @@
 .alert-class{
-    -fx-background-color: #ffffe0;
+    -fx-background-color: #ffffff;
 }
 .alert-class > *.button-bar > *.container{
-    -fx-background-color: #ffffe0;
+    -fx-background-color: #ffffff;
 }
 .alert-class > *.label.content{
-    -fx-font-size: 24px;
-    -fx-font-weight: bold;
+    -fx-font-size: 22px;
+
 }
 .alert-class:header *.header-panel{
     -fx-background-color: #a59c31;
