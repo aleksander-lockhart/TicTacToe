@@ -1,5 +1,8 @@
 package Game;
 
+import javafx.animation.KeyFrame;
+import javafx.animation.KeyValue;
+import javafx.animation.Timeline;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -8,8 +11,11 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.*;
+import javafx.scene.shape.Line;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
+import javafx.util.Duration;
+
 import java.util.ArrayList;
 
 
@@ -19,6 +25,7 @@ public class TicTacToe extends Application {
     private static ArrayList<Button> cells = new ArrayList<>();
     private ComputerMove aiLogic;
     private Label statusLabel;
+    private Line line;
 
     public TicTacToe() {
         statusLabel = new Label("");
@@ -90,8 +97,8 @@ public class TicTacToe extends Application {
         primaryStage.setTitle("TIC TAC TOE");
         primaryStage.show();
     }
-
-    // single cell builder and action caller
+    
+    // single cell builder and actions on board
     private Button createCell() {
         Button cell = new Button("") {{
             setPrefHeight(110);
