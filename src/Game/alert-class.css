@@ -1,0 +1,18 @@
+.alert-class{
+    -fx-background-color: #ffffe0;
+}
+.alert-class > *.button-bar > *.container{
+    -fx-background-color: #ffffe0;
+}
+.alert-class > *.label.content{
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+}
+.alert-class:header *.header-panel{
+    -fx-background-color: #a59c31;
+}
+.alert-class:header *.header-panel *.label{
+    -fx-font-size: 18px;
+    -fx-font-style: italic;
+    -fx-fill: #292929;
+}

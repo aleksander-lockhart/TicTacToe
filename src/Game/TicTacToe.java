@@ -1,21 +1,14 @@
 package Game;
 
-import javafx.animation.KeyFrame;
-import javafx.animation.KeyValue;
-import javafx.animation.Timeline;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.*;
-import javafx.scene.shape.Line;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
-import javafx.util.Duration;
-
 import java.util.ArrayList;
 
 
@@ -25,7 +18,9 @@ public class TicTacToe extends Application {
     private static ArrayList<Button> cells = new ArrayList<>();
     private ComputerMove aiLogic;
     private Label statusLabel;
-    private Line line;
+    Alerts showInfo = new Alerts();
+    AlternativeAlert showStatus = new AlternativeAlert();
+
 
     public TicTacToe() {
         statusLabel = new Label("");
@@ -38,18 +33,8 @@ public class TicTacToe extends Application {
         clearGridArray();
 
         // Show Rules
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-
-        alert.setHeight(800);
-        alert.setWidth(800);
-        alert.setTitle("TicTacToe rules");
-        alert.setHeaderText(null);
-        alert.setContentText("1. The game is played on a grid that's 3 squares by 3 squares.\n \n" +
-                "2. You are X, your friend (or the computer in this case) is O. Players take turns putting their marks in empty squares.\n \n" +
-                "3. The first player to get 3 of her marks in a row (up, down, across, or diagonally) is the winner.\n \n" +
-                "4. When all 9 squares are full, the game is over.");
-        alert.showAndWait();
-
+//        showInfo.showRules();
+        showStatus.createAlert();
     }
 
     @Override
@@ -97,8 +82,8 @@ public class TicTacToe extends Application {
         primaryStage.setTitle("TIC TAC TOE");
         primaryStage.show();
     }
-    
-    // single cell builder and actions on board
+
+    // single cell builder and action caller
     private Button createCell() {
         Button cell = new Button("") {{
             setPrefHeight(110);
