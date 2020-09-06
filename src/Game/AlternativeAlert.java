@@ -23,7 +23,7 @@ public class AlternativeAlert {
 
         DialogPane dialogPane = alert.getDialogPane();
         dialogPane.getStylesheets().add(
-                getClass().getResource("alert-class.css").toExternalForm());
+                getClass().getResource("css/alert-class.css").toExternalForm());
         dialogPane.getStyleClass().add("alert-class");
 
         alert.initModality(Modality.APPLICATION_MODAL);
